@@ -5,6 +5,7 @@ package indi.yugj.test.sitemap.htmlparser;
  * Created by yugj on 17/3/20.
  */
 
+import org.apache.commons.lang.StringUtils;
 import org.htmlparser.Parser;
 import org.htmlparser.filters.NodeClassFilter;
 import org.htmlparser.tags.LinkTag;
@@ -18,6 +19,10 @@ import java.util.Queue;
 public class HtmlLinkCrawler {
 
     private static final String BASE_PREFIX = "http://www.migudm.cn";
+
+    private Long totalUrl = 0L;
+    private Long totalAttachFile = 0L;
+    private Long totalNullUrl = 0L;
 
     // htmlParser解析器
     private Parser parser = new Parser();
@@ -63,9 +68,10 @@ public class HtmlLinkCrawler {
                 String linkUrl =linkTag.getLink();
                 String dataUrl = linkTag.getAttribute("data-url");
 
-                String fixUrl = BASE_PREFIX + dataUrl;
+                countUrl(linkUrl,dataUrl);
 
-                System.out.println("link url:" + linkUrl + ",data url:" + dataUrl);
+                String fixUrl = BASE_PREFIX + dataUrl;
+                System.out.println("total url size:" + getTotalUrl() + ",link url:" + linkUrl + ",data url:" + dataUrl);
 
                 if(checkStationUrl(linkUrl) && noContains(linkUrl)){
 
@@ -123,6 +129,61 @@ public class HtmlLinkCrawler {
      */
     public Queue<String> getLinkUrlQueue(){
         return this.queue;
+    }
+
+
+    /**
+     * 统计不同类型地址
+     * @param url
+     * @param dataUrl
+     */
+    private void countUrl(String url,String dataUrl) {
+
+        if (StringUtils.isBlank(url) && StringUtils.isBlank(dataUrl)) {
+            this.totalNullUrl ++;
+            return;
+        }
+
+        this.totalUrl ++ ;
+
+        if (StringUtils.isNotBlank(dataUrl)) {
+            return;
+        }
+
+        if (isAttachFile(url)) {
+            this.totalAttachFile ++;
+        }
+
+    }
+
+    /**
+     * 判断是否为附件
+     * @param url
+     * @return
+     */
+    private boolean isAttachFile(String url) {
+        if (StringUtils.isBlank(url)) {
+            return false;
+        }
+
+        boolean isAttach = url.endsWith(".zip") || url.endsWith(".rar")
+                || url.endsWith(".docx") || url.endsWith(".doc")
+                || url.endsWith(".xlsx") || url.endsWith(".xls")
+                || url.endsWith(".pptx") || url.endsWith(".ppt");
+
+        return isAttach;
+    }
+
+    public Long getTotalUrl() {
+        return this.totalUrl;
+    }
+
+    public Long getTotalAttachFile() {
+        return this.totalAttachFile;
+    }
+
+    public Long getTotalNullUrl() {
+        return this.totalNullUrl;
     }
 
 }

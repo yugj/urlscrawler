@@ -18,7 +18,7 @@ public class CompUrl {
 
     public static void main(String[] args) throws Exception {
 
-        String wapUrlPath = "/Users/yugj/Documents/tmp/compurl/sitemap-www-new.txt";
+        String wapUrlPath = "/Users/yugj/Documents/tmp/compurl/link-www.txt";
         String opusPath = "/Users/yugj/Documents/tmp/compurl/allopus.xlsx";
 
         String errorPath = "/Users/yugj/Documents/tmp/compurl/error-www.txt";

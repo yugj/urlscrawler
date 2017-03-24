@@ -15,8 +15,13 @@ public class SinglePageTest {
 
     public static void main(String args[]) {
         SinglePageTest test = new SinglePageTest();
-        String url = "http://m.migudm.cn/comic/school_p";
-        test.crawl(url);
+        String url = "http://www.migudm.cn/cartoon/list_p";
+
+        for (int i = 2; i <= 59; i++) {
+            String temp = url + i + "/";
+            test.crawl(temp);
+        }
+
     }
 
     // htmlParser解析器
