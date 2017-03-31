@@ -51,6 +51,11 @@ public class CrawlerWwwMain {
         System.out.println("文件写入成功,文件位置:" + fileWww);
 
         System.out.println("抓取页面总时间:" + (endTime - startTime));
+
+        System.out.println("网站总链接数:" + crawler.getTotalUrl());
+        System.out.println("网站总附件数:" + crawler.getTotalAttachFile());
+        System.out.println("网站总附件数:" + crawler.getTotalAttachFile());
+        System.out.println("网站空地址数:" + crawler.getTotalNullUrl());
     }
 
 
