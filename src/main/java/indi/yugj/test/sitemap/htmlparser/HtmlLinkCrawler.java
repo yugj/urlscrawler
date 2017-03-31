@@ -63,22 +63,23 @@ public class HtmlLinkCrawler {
                 String linkUrl = linkTag.getLink();
                 String dataUrl = linkTag.getAttribute("data-url");
 
+                //count link by type
                 if (isAttachFile(linkUrl)) {
                     this.totalAttachFile++;
                     continue;
                 }
-
                 countUrl(linkUrl, dataUrl);
 
                 String fixUrl = BASE_PREFIX + dataUrl;
-                System.out.println("total url size:" + getTotalUrl() + ",link url:" + linkUrl + ",data url:" + dataUrl);
+                System.out.println("total url count:" + getTotalUrl() + ",link url:" + linkUrl + ",data url:" + dataUrl);
 
                 String targetUrl = null;
-
                 if (checkStationUrl(linkUrl) && noContains(linkUrl)) {
                     targetUrl = linkUrl;
                 } else if (null != dataUrl && !"".equals(dataUrl) && noContains(fixUrl)) {
                     targetUrl = fixUrl;
+                } else {
+                    continue;
                 }
 
                 urlContainer.add(targetUrl);
