@@ -4,11 +4,12 @@ package indi.yugj.test.sitemap.htmlparser;
  * entry
  * Created by yugj on 17/3/20.
  */
+
 import indi.yugj.test.sitemap.utils.FileUtil;
 import indi.yugj.test.sitemap.utils.HttpUtil;
 
 import java.io.IOException;
-import java.util.Queue;
+import java.util.Set;
 
 public class CrawlerWapMain {
 
@@ -19,20 +20,16 @@ public class CrawlerWapMain {
 
         long startTime = System.currentTimeMillis();
 
-        // 网站的基础地址
         String baseWap = "http://m.migudm.cn/";
-        // 爬去地址
         HtmlLinkCrawler crawler = new HtmlLinkCrawler(baseWap);
 
-         //执行抓取
         crawler.execute(baseWap);
 
         crawSpecialPage4Wap(crawler);
 
         System.out.println("抓取结束,准备写入文件...");
 
-        // 获取到所有地址
-        Queue<String> linkUrlQueue = crawler.getLinkUrlQueue();
+        Set<String> linkUrlQueue = crawler.getLinkUrlQueue();
 
         // 打印站内链接地址，并输出到sitemap.txt文件
         String fileWap = "/Users/yugj/Documents/tmp/sitemap/htmlparser/sitemap-wap-" + startTime + ".txt";

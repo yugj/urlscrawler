@@ -8,7 +8,7 @@ import indi.yugj.test.sitemap.utils.FileUtil;
 import indi.yugj.test.sitemap.utils.HttpUtil;
 
 import java.io.IOException;
-import java.util.Queue;
+import java.util.Set;
 
 public class CrawlerWwwMain {
 
@@ -27,15 +27,15 @@ public class CrawlerWwwMain {
          //执行抓取
         crawler.execute(baseWww);
 
-        crawSpecialPage4Www(crawler);
+        catchSpecialPage4Www(crawler);
 
         System.out.println("抓取结束,准备写入文件...");
 
         // 获取到所有地址
-        Queue<String> linkUrlQueue = crawler.getLinkUrlQueue();
+        Set<String> linkUrlQueue = crawler.getLinkUrlQueue();
 
         // 打印站内链接地址，并输出到sitemap.txt文件
-        String fileWww = "/Users/yugj/Documents/tmp/sitemap/htmlparser/sitemap-www-" + startTime + ".txt";
+        String fileWww = "/Users/yugj/Documents/hell/sitemap/htmlparser/sitemap-www-" + startTime + ".txt";
 
         for(String linkUrl : linkUrlQueue){
             System.out.println("写入文件:" + linkUrl);
@@ -54,7 +54,7 @@ public class CrawlerWwwMain {
     }
 
 
-    private static void crawSpecialPage4Www(HtmlLinkCrawler crawler) {
+    private static void catchSpecialPage4Www(HtmlLinkCrawler crawler) {
 
         specialBaseCraw(crawler,"http://www.migudm.cn/ugc_p",15);
 

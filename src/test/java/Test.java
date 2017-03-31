@@ -2,8 +2,9 @@ import com.redfin.sitemapgenerator.ChangeFreq;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
 import com.redfin.sitemapgenerator.WebSitemapUrl;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 
 /**
@@ -15,20 +16,26 @@ public class Test {
     @org.junit.Test
     public void gSiteMap() throws IOException {
 
-        File dest = new File("/Users/yugj/Documents/tmp/sitemap/");
+        StringBuilder responseBuilder = null;
+        BufferedReader reader = null;
+        OutputStreamWriter wr = null;
+        URL url;
+        try {
+            url = new URL("http://www.migudm.cn/comic/school_p2222/");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(1000 * 5);
+            conn.connect();
 
-        String homepage = "http://www.migudm.cn";
+            int hell = conn.getResponseCode();
 
-        WebSitemapGenerator wsg = new WebSitemapGenerator(homepage, dest);
+            System.out.println("hell " + hell);
 
-        WebSitemapUrl url = new WebSitemapUrl.Options("http://www.migudm.cn/comic/")
-                .lastMod(new Date()).priority(1.0).changeFreq(ChangeFreq.HOURLY).build();
+            conn.disconnect();
 
-        // this will configure the URL with lastmod=now, priority=1.0, changefreq=hourly
-
-        wsg.addUrl(url);
-
-        wsg.write();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

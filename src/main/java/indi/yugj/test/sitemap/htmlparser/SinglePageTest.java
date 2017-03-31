@@ -24,9 +24,7 @@ public class SinglePageTest {
 
     }
 
-    // htmlParser解析器
     private Parser parser = new Parser();
-    // 链接Filter过滤器
     private NodeClassFilter linkFilter = new NodeClassFilter(LinkTag.class);
 
 

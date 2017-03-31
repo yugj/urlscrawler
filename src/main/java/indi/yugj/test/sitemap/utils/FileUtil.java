@@ -1,6 +1,7 @@
 package indi.yugj.test.sitemap.utils;
 
 /**
+ *
  * Created by yugj on 17/3/20.
  */
 import java.io.BufferedWriter;
@@ -11,12 +12,12 @@ import java.io.IOException;
 public class FileUtil {
 
     /**
-     * @param name
+     * @param path
      * @param text
      * @throws IOException
      */
-    public static void write(String name, String text) throws IOException {
-        File file = new File(name);
+    public static void write(String path, String text) throws IOException {
+        File file = new File(path);
         FileWriter fw = new FileWriter(file, true);
         BufferedWriter bw = new BufferedWriter(fw);
         bw.append(text);
@@ -26,12 +27,12 @@ public class FileUtil {
     }
 
     /**
-     * @param name
+     * @param path
      * @param text
      * @throws IOException
      */
-    public static void writeln(String name, String text) throws IOException {
-        write(name, text + "\r\n");
+    public static void writeln(String path, String text) throws IOException {
+        write(path, text + "\r\n");
     }
 
 }
