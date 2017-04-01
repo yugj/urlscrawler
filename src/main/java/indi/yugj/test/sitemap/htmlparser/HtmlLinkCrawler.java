@@ -74,10 +74,13 @@ public class HtmlLinkCrawler {
                 System.out.println("total url count:" + getTotalUrl() + ",link url:" + linkUrl + ",data url:" + dataUrl);
 
                 String targetUrl = null;
+                String targetFrom = null;
                 if (checkStationUrl(linkUrl) && noContains(linkUrl)) {
                     targetUrl = linkUrl;
+                    targetFrom = "src";
                 } else if (null != dataUrl && !"".equals(dataUrl) && noContains(fixUrl)) {
                     targetUrl = fixUrl;
+                    targetFrom = "data-url";
                 } else {
                     continue;
                 }
@@ -85,7 +88,7 @@ public class HtmlLinkCrawler {
                 urlContainer.add(targetUrl);
                 this.crawl(targetUrl);
                 int queenSize = getLinkUrlQueue().size();
-                System.out.println("--->> urlContainer size :" + queenSize + ",target url :" + targetUrl);
+                System.out.println(targetFrom + "--->> urlContainer size :" + queenSize + ",target url :" + targetUrl);
 
             }
 
@@ -101,7 +104,7 @@ public class HtmlLinkCrawler {
      * @return
      */
     private boolean checkStationUrl(String link) {
-        return link != null ? link.startsWith(this.baseUrl) : false;
+        return link != null && link.startsWith(this.baseUrl);
     }
 
     /**
