@@ -93,6 +93,7 @@ public class HtmlLinkCrawler {
             }
 
         } catch (ParserException e) {
+            System.out.println("error url : " + url);
             e.printStackTrace();
         }
     }

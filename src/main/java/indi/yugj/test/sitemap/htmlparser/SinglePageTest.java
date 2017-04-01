@@ -15,7 +15,7 @@ public class SinglePageTest {
 
     public static void main(String args[]) {
         SinglePageTest test = new SinglePageTest();
-        String url = "http://tv.sohu.com/20160412/n443912078.shtml";
+        String url = "http://www.migudm.cn/cartoon/list_time/";
 
         test.crawl(url);
 
