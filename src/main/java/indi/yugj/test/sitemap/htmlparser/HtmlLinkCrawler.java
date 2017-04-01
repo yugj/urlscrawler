@@ -86,9 +86,11 @@ public class HtmlLinkCrawler {
                 }
 
                 urlContainer.add(targetUrl);
-                this.crawl(targetUrl);
+
                 int queenSize = getLinkUrlQueue().size();
-                System.out.println(targetFrom + "--->> urlContainer size :" + queenSize + ",target url :" + targetUrl);
+                System.out.println(targetFrom + url + "--->> urlContainer size :" + queenSize + ",target url :" + targetUrl);
+
+                this.crawl(targetUrl);
 
             }
 
